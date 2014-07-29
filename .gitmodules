@@ -1,0 +1,6 @@
+[submodule "dotfiles"]
+	path = dotfiles
+	url = ./dotfiles
+[submodule "omekaplay"]
+	path = omekaplay
+	url = ./omekaplay
