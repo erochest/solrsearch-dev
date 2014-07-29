@@ -1,6 +1,6 @@
 [submodule "dotfiles"]
 	path = dotfiles
-	url = ./dotfiles
+	url = git@github.com:erochest/ansible-dotfiles.git
 [submodule "omekaplay"]
 	path = omekaplay
-	url = ./omekaplay
+	url = git@github.com:erochest/ansible-omeka.git
