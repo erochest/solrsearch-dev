@@ -1,0 +1,28 @@
+---
+- hosts: all
+  tasks:
+    # - include: omekaplay/tasks/install.yml
+    # - include: omekaplay/tasks/config.yml
+    # - include: omekaplay/tasks/db.yml
+    # - include: omekaplay/tasks/apache.yml
+    # - include: omekaplay/tasks/omeka.yml
+
+    # - include: dotfiles/tasks/install.yml
+    # - include: dotfiles/tasks/ssh.yml
+    # - include: dotfiles/tasks/dots.yml
+    # - include: dotfiles/tasks/bash_it.yml
+    # - include: dotfiles/tasks/vim.yml
+
+    # - include: apache.yml
+    # - include: node.yml
+    # - include: ruby.yml
+    - include: solr.yml
+    - include: other.yml
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
+      sudo: true
+    - name: restart tomcat7
+      service: name=tomcat7 state=restarted
+      sudo: true

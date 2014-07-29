@@ -1,0 +1,30 @@
+---
+- name: install dependencies
+  sudo: true
+  apt: pkg={{ item }}
+  with_items:
+    - libxslt-dev
+    - libwebkit-dev
+    - libqtwebkit-dev
+    - qt4-qmake
+    - xvfb
+- name: coffeescript
+  sudo: true
+  npm: global=yes name=coffee-script
+
+- name: install build utils
+  apt: pkg={{ item }} state=latest
+  sudo: true
+  with_items:
+    - automake
+    - pkg-config
+    - libpcre3-dev
+    - zlib1g-dev
+    - liblzma-dev
+- name: clone ag
+  git: repo=https://github.com/ggreer/the_silver_searcher.git dest=/tmp/ag
+- name: build ag
+  shell: ./build.sh chdir=/tmp/ag
+- name: install ag
+  shell: make install chdir=/tmp/ag
+  sudo: true
