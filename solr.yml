@@ -6,16 +6,16 @@
     - tomcat7
     - tomcat7-admin
 - name: solr downloaded?
-  command: /usr/bin/test -e /tmp/solr-4.7.2.tgz
+  command: /usr/bin/test -e /tmp/solr-{{ solr_version | default('4.7.1') }}.tgz
   register: solr_downloaded
   ignore_errors: True
 - name: download solr
   get_url: >
-    url=http://archive.apache.org/dist/lucene/solr/4.7.2/solr-4.7.2.tgz
+    url=http://archive.apache.org/dist/lucene/solr/{{ solr_version | default('4.7.1') }}/solr-{{ solr_version }}.tgz
     dest=/tmp/
   when: solr_downloaded|failed
 - name: untar solr
-  command: tar xfz solr-4.7.2.tgz
+  command: tar xfz solr-{{ solr_version | default('4.7.1') }}.tgz
   args:
     chdir: /tmp
 - name: solr shared
@@ -23,7 +23,7 @@
   register: solr_shared
   ignore_errors: True
 - name: mv solr
-  command: mv /tmp/solr-4.7.2 /usr/share/solr
+  command: mv /tmp/solr-{{ solr_version | default('4.7.1') }} /usr/share/solr
   when: solr_shared|failed
   sudo: true
 - name: cp solr.war

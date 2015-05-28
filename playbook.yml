@@ -1,28 +1,12 @@
 ---
-- hosts: all
-  tasks:
-    - include: omekaplay/tasks/install.yml
-    - include: omekaplay/tasks/config.yml
-    - include: omekaplay/tasks/db.yml
-    - include: omekaplay/tasks/apache.yml
-    - include: omekaplay/tasks/omeka.yml
+- name: vagrant playbook
+  hosts: all
 
-    - include: dotfiles/tasks/install.yml
-    - include: dotfiles/tasks/ssh.yml
-    - include: dotfiles/tasks/dots.yml
-    - include: dotfiles/tasks/bash_it.yml
-    - include: dotfiles/tasks/vim.yml
-
-    - include: apache.yml
-    - include: node.yml
-    - include: ruby.yml
-    - include: solr.yml
-    - include: other.yml
-
-  handlers:
-    - name: restart apache2
-      service: name=apache2 state=restarted
-      sudo: true
-    - name: restart tomcat7
-      service: name=tomcat7 state=restarted
-      sudo: true
+- include: omekaplay/playbook.yml
+- include: dotfiles/playbook.yml
+- include: ansible-playbooks/apache.yml
+- include: ansible-playbooks/node.yml
+- include: ansible-playbooks/rvm-ruby.yml
+- include: ansible-playbooks/solr.yml
+- include: ansible-playbooks/other.yml
+- include: ansible-playbooks/ag.yml
